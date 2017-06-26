@@ -1,13 +1,42 @@
 # Code Book- run_analysis.R
 
-This is the summary of data fields in 'tidy.txt'- the output from run_analysis.R
+## Description
 
-## Identifiers
+See readme.MD and the JHU Getting and Cleaning Data course page in Coursera.
+
+## Source Data
+
+A description of the data used in the project can the found at [The UCI Machine Learning Repository](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+
+## Cleaning steps taken in run_analysis.R:
+
+### Merge training and test data sets into combined data set
+Read train and test data into separate data frames. Read subject and features names and subject IDs to add to combined data set later. Apply features as column names of the train and test data. Combine the train and test data into one data frame.
+
+### Extract only mean and standard deviation measurements
+Search for only column names with meand() and std() in their name to subset the combined data set. Used the following general expression: "mean\\(\\)" | "std\\(\\)"
+
+### Use descriptive activity names
+Added descriptive activity names by applying labels for the corresponding Activity value in each row.
+
+### Appropriately label data set
+Kept original measurement names, but Activity column uses descriptive names.
+
+### Create tidy data set with average of measurements on two dimensions- SubjectID and Activity
+Melted data by subjectID and activity (using reshape2 library). Used dcast (also from reshape2 library) to cast a molten data frame into a tidy data frame with average of each measurement by subjectID+activity.
+
+## Tidy.txt:
+
+This is the summary of data fields in 'tidy.txt'- the output from run_analysis.R:
+
+### Identifiers
 
 * subjectID - ID of the test subject
 * activity - Type of activity performed when measurements were taken
 
-## Activity Labels
+### Activity Labels
 
 * Walking - subject was walking
 * Walking Upstairs - subject was walking up a staircase
@@ -16,7 +45,7 @@ This is the summary of data fields in 'tidy.txt'- the output from run_analysis.R
 * Standing - subject was standing
 * Laying - subject was laying down
 
-## Measurements
+### Measurements
 
 * tBodyAcc-mean()-X
 * tBodyAcc-mean()-Y
