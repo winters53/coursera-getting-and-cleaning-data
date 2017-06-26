@@ -45,4 +45,4 @@ combined_df_melt <- melt(combined_df, id=c("subjectID", "activity"))
 combined_df_tidy <- dcast(combined_df_melt, subjectID+activity ~ variable, mean)
 
 ## Output independent combined tidy data frame to tidy.txt
-write.table(combined_df_tidy, "tidy.txt", sep = "\t")
+write.table(combined_df_tidy, "tidy.txt", row.name = FALSE, sep = "\t")
